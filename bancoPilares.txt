@@ -1,0 +1,31 @@
+USE bancopilares ;
+CREATE TABLE Cliente (
+cpf BIGINT NOT NULL,
+nome VARCHAR (255),
+sobrenome VARCHAR (255),
+sexo VARCHAR (10),
+estadoCivil VARCHAR (10),
+cep VARCHAR (255),
+endereco VARCHAR (255),
+PRIMARY KEY (cpf))
+ENGINE = InnoDB;
+
+CREATE TABLE Conta (
+codigo BIGINT NOT NULL,
+agencia VARCHAR (255),
+saldo FLOAT,
+tipo VARCHAR (255),
+cpf BIGINT,
+PRIMARY KEY (codigo),
+CONSTRAINT fk_cliente FOREIGN KEY fk_cliente ( cpf )
+REFERENCES Cliente (cpf)
+ON DELETE CASCADE
+ON UPDATE RESTRICT
+)
+ENGINE = InnoDB;
+
+
+
+ select cli.*, con.*
+ from Cliente cli
+ inner join Conta con on cli.cpf = con.cpf;
